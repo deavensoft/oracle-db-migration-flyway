@@ -4,6 +4,7 @@ CREATE OR REPLACE PACKAGE employee_management_pkg IS
     PROCEDURE add_company(p_name VARCHAR2, p_location VARCHAR2);
 PROCEDURE add_department(p_department_name VARCHAR2, p_company_id NUMBER);
 PROCEDURE add_employee(p_first_name VARCHAR2, p_last_name VARCHAR2, p_email VARCHAR2, p_department_id NUMBER);
+PROCEDURE inactivate_employee(p_employee_id NUMBER);
 
     -- Read Operations
 FUNCTION get_company(p_company_id NUMBER) RETURN SYS_REFCURSOR;
@@ -93,6 +94,11 @@ PROCEDURE delete_employee(p_employee_id NUMBER) IS
     BEGIN
 DELETE FROM employees WHERE employee_id = p_employee_id;
 END delete_employee;
+
+PROCEDURE inactivate_employee(p_employee_id NUMBER) IS
+    BEGIN
+UPDATE employees SET inactive = 0 WHERE employee_id = p_employee_id;
+END inactivate_employee;
 
 END employee_management_pkg;
 /

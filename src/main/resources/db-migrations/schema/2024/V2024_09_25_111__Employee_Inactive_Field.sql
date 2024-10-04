@@ -1,0 +1,1 @@
+ALTER TABLE employees ADD (inactive NUMBER(1));
